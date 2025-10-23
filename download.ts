@@ -273,7 +273,7 @@ export async function download(options: FetchOptions): Promise<string> {
     switch (url.protocol) {
       case "http:":
       case "https:": {
-        console.log(`${green("Downloading")} ${url}`);
+        console.error(`${green("Downloading")} ${url}`);
         const response = await fetch(url.toString());
 
         if (!response.ok) {
@@ -294,7 +294,7 @@ export async function download(options: FetchOptions): Promise<string> {
       }
 
       case "file:": {
-        console.log(`${green("Copying")} ${url}`);
+        console.error(`${green("Copying")} ${url}`);
         await Deno.copyFile(fromFileUrl(url), cacheFilePath);
         if (Deno.build.os !== "windows") {
           await Deno.chmod(cacheFilePath, 0o644);
